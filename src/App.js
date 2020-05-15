@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Nav from "./components/Nav";
-import RemoteUpload from "./components/RemoteUpload";
-import "./App.css";
+import HookRemoteUpload from "./components/HookRemoteUpload";
 
 class App extends Component {
   render() {
@@ -12,8 +11,7 @@ class App extends Component {
           <h1>Remote-Upload.HerokuApp.Com</h1>
           <p>Upload everything to your Google Drive</p>
         </div>
-        <div id="alertBox" className="floating_alert"></div>
-        <RemoteUpload />
+        <HookRemoteUpload />
       </>
     );
   }
