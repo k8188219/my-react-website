@@ -9,12 +9,12 @@ function useRemoteUpload() {
 
   const submitForm = () => {
     if (url === "" || name === "") {
-      setAlerts(prevAlerts => [
+      setAlerts((prevAlerts) => [
         ...prevAlerts,
         {
-          timestamp: new Date().getTime() + "" + prevAlerts.length,
-          msg: "Please fill in all required fields.",
-        },
+          key: new Date().getTime() + "" + prevAlerts.length,
+          msg: "Please fill in all required fields."
+        }
       ]);
       return;
     }
@@ -22,50 +22,67 @@ function useRemoteUpload() {
     fetch("https://remote-upload.herokuapp.com/", {
       body: new URLSearchParams({
         url,
-        name,
+        name
       }).toString(),
       method: "POST",
       credentials: "include",
-      headers: { "Content-type": "application/x-www-form-urlencoded" },
+      headers: { "Content-type": "application/x-www-form-urlencoded" }
     }).then(
-      result => {
-        console.log(result);
+      (result) => {
+        setAlerts((prevAlerts) => [
+          ...prevAlerts,
+          {
+            type: "success",
+            key: new Date().getTime() + "" + prevAlerts.length,
+            msg: name + " add into upload queue."
+          }
+        ]);
       },
-      error => {
+      (error) => {
+        setAlerts((prevAlerts) => [
+          ...prevAlerts,
+          {
+            type: "error",
+            key: new Date().getTime() + "" + prevAlerts.length,
+            msg: "An error occurred."
+          }
+        ]);
         console.log(error);
       }
     );
+    resetUrl();
+    resetName();
   };
 
-  const alertDissmissHandler = index => {
-    setAlerts(prevAlerts => [
-        ...prevAlerts.slice(0, index),
-        ...prevAlerts.slice(index + 1),
-      ]);
+  const alertDissmissHandler = (key) => {
+    setAlerts((prevAlerts) => {
+      const index = prevAlerts.findIndex((alert) => alert.key === key);
+      return [...prevAlerts.slice(0, index), ...prevAlerts.slice(index + 1)];
+    });
   };
 
   useEffect(() => {
-    console.log('autoGenerate')
+    console.log("autoGenerate");
     const urlParse = /https?:\/\/.+[/]([^/?]+).*/.exec(url) || [];
     const filename = decodeURIComponent(urlParse[1] || "");
     setName(filename);
   }, [url]);
 
   useEffect(() => {
-    console.log('mount')
+    console.log("mount");
 
     const refreshList = () => {
       if (window.debug_mode) return refreshList;
       fetch("https://remote-upload.herokuapp.com/?list", {
-        credentials: "include",
+        credentials: "include"
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(
-          result => {
+          (result) => {
             console.log(result);
-            setList({...result})
+            setList({ ...result });
           },
-          error => {
+          (error) => {
             console.log(error);
           }
         );
@@ -77,7 +94,7 @@ function useRemoteUpload() {
     };
   }, []);
 
-  return [alerts, list, bindUrl, bindName, submitForm, alertDissmissHandler]
+  return [alerts, list, bindUrl, bindName, submitForm, alertDissmissHandler];
 }
 
 export default useRemoteUpload;

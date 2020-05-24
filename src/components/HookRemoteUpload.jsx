@@ -3,24 +3,16 @@ import AlertMessage from "./AlertMessage";
 import useRemoteUpload from "../hooks/useRemoteUpload";
 
 function HookRemoteUpload() {
-  const [
-    alerts,
-    list,
-    bindUrl,
-    bindName,
-    submitForm,
-    alertDissmissHandler,
-  ] = useRemoteUpload();
+  const [alerts, list, bindUrl, bindName, submitForm, alertDissmissHandler] = useRemoteUpload();
   return (
     <>
       <div id="alertBox" className="floating_alert">
-        {alerts.map(({ msg, timestamp }, i) => (
+        {alerts.map((props, i) => (
           <AlertMessage
-            key={timestamp}
-            msg={msg}
             alertDissmissHandler={() => {
-              alertDissmissHandler(i);
+              alertDissmissHandler(props.key);
             }}
+            {...props}
           />
         ))}
       </div>
@@ -28,28 +20,13 @@ function HookRemoteUpload() {
         <form action="" method="get" id="form">
           <div className="form-row" style={{ overflow: "auto" }}>
             <div className="col-md-4 col-sm-6 col-12">
-              <input
-                type="text"
-                className="form-control mb-2 mr-sm-2"
-                placeholder="url"
-                {...bindUrl}
-              />
+              <input type="text" className="form-control mb-2 mr-sm-2" placeholder="url" {...bindUrl} />
             </div>
             <div className="col-md-2 col-sm-4 col-8">
-              <input
-                type="text"
-                className="form-control mb-2 mr-sm-2"
-                placeholder="name"
-                {...bindName}
-              />
+              <input type="text" className="form-control mb-2 mr-sm-2" placeholder="name" {...bindName} />
             </div>
             <div className="col-md-1 col-sm-2 col-4">
-              <input
-                onClick={submitForm}
-                type="button"
-                className="btn btn-primary mb-2"
-                value="Submit"
-              />
+              <input onClick={submitForm} type="button" className="btn btn-primary mb-2" value="Submit" />
             </div>
           </div>
         </form>
