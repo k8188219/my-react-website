@@ -7,6 +7,24 @@ function useRemoteUpload() {
   const [alerts, setAlerts] = useState([]);
   const [list, setList] = useState({});
 
+  const refreshList = () => {
+    if (window.debug_mode) return refreshList;
+    fetch("https://remote-upload.herokuapp.com/?list", {
+      credentials: "include"
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setList({ ...result });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    return refreshList;
+  };
+
   const submitForm = () => {
     if (url === "" || name === "") {
       setAlerts((prevAlerts) => [
@@ -37,6 +55,7 @@ function useRemoteUpload() {
             msg: name + " add into upload queue."
           }
         ]);
+        refreshList();
       },
       (error) => {
         setAlerts((prevAlerts) => [
@@ -62,32 +81,12 @@ function useRemoteUpload() {
   };
 
   useEffect(() => {
-    console.log("autoGenerate");
     const urlParse = /https?:\/\/.+[/]([^/?]+).*/.exec(url) || [];
     const filename = decodeURIComponent(urlParse[1] || "");
     setName(filename);
   }, [url]);
 
   useEffect(() => {
-    console.log("mount");
-
-    const refreshList = () => {
-      if (window.debug_mode) return refreshList;
-      fetch("https://remote-upload.herokuapp.com/?list", {
-        credentials: "include"
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            console.log(result);
-            setList({ ...result });
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      return refreshList;
-    };
     const i = setInterval(refreshList(), 3000);
     return () => {
       clearInterval(i);

@@ -43,7 +43,7 @@ function HookRemoteUpload() {
                 return (
                   <tr key={key}>
                     <td>{key}</td>
-                    <td>{list[key]}</td>
+                    <td>{list[key]}%</td>
                   </tr>
                 );
               })}
