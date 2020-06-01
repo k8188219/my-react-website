@@ -84,7 +84,7 @@ function useRemoteUpload() {
     const urlParse = /https?:\/\/.+[/]([^/?]+).*/.exec(url) || [];
     const filename = decodeURIComponent(urlParse[1] || "");
     setName(filename);
-  }, [url]);
+  }, [url, setName]);
 
   useEffect(() => {
     const i = setInterval(refreshList(), 3000);
