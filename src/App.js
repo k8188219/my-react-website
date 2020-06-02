@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <>
         <Nav />
-        <div className="jumbotron text-center">
+        <div className="jumbotron text-center mb-0">
           <h1>Remote-Upload.HerokuApp.Com</h1>
           <p>Upload everything to your Google Drive</p>
         </div>
