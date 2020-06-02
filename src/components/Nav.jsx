@@ -2,7 +2,7 @@ import React from "react";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav className="navbar navbar-expand-md bg-purple navbar-dark">
       <div className="container">
         <a className="navbar-brand" href="/index.html">
           Remote-Upload

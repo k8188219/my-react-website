@@ -23,7 +23,7 @@ class AlertMessage extends Component {
   };
 
   componentDidMount() {
-    if(this.props.type === "error") return
+    if (this.props.type === "error") return;
     const idOfSettimeout = setTimeout(this.clickHandler, 3000);
     this.setState({ idOfSettimeout });
   }
@@ -35,8 +35,8 @@ class AlertMessage extends Component {
     const { show } = this.state;
     const { msg, type } = this.props;
     return (
-      <div className={`alert ${this.getAlertType()} alert-dismissible fade ${show ? "show" : ""}`}>
-        <button type="button" className="close" onClick={this.clickHandler}>
+      <div className={`mb-2 pr-5 alert ${this.getAlertType()} alert-dismissible fade ${show ? "show" : ""}`}>
+        <button type="button" className="close pl-3 pr-3" onClick={this.clickHandler}>
           &times;
         </button>
         <strong>{type || "warning"}: </strong>
