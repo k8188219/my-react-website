@@ -11,9 +11,6 @@ class Login extends Component {
       login: LOGIN_STATE.INIT
     };
   }
-  initToolTip = () => {
-    window.$('[data-toggle="tooltip"]').tooltip();
-  };
   chechLogin = () => {
     fetch("https://remote-upload.herokuapp.com/", { redirect: "manual", credentials: "include" }).then((res) => {
       if (res.type === "opaqueredirect") {
@@ -44,15 +41,15 @@ class Login extends Component {
     this.chechLogin();
   }
 
-  componentDidUpdate() {
-    this.initToolTip();
-  }
-
-  loginPage = ({show = false} = {}) => {
+  loginPage = ({ show = false } = {}) => {
     return (
       <>
-        <div className="modal-backdrop show"></div>
-        <div className={`modal d-block fade ${show ? "show" : ""}`}>
+        <div className="modal-backdrop show">
+          <div className={`align-items-center ${show ? "d-none" : "d-flex"} justify-content-center h-100`}>
+            <div className="spinner-border text-light"></div>
+          </div>
+        </div>
+        <div className={`modal fade d-block ${show ? "show" : ""}`} style={{ zIndex: show ? "1040" : "-1" }}>
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-body">
@@ -68,9 +65,17 @@ class Login extends Component {
                   <h1 className="h3 mb-3 font-weight-normal">Login</h1>
                   <input type="email" id="inputEmail" className="form-control" placeholder="Email address" disabled />
                   <input type="password" id="inputPassword" className="form-control" placeholder="Password" disabled />
-                  <span tabIndex="0" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                    <input className="btn btn-lg btn-primary btn-block" value="Sign in" disabled />
-                  </span>
+                  <div className="position-relative">
+                    <div className="bs-tooltip-top show tooltip w-100" style={{ top: "calc(-0.8rem - .5rem - 1.5em)" }}>
+                      <div className="arrow" style={{ left: "calc(50% - 0.4rem)" }}></div>
+                      <div className="tooltip-inner ml-auto mr-auto" style={{ width: "fit-content" }}>
+                        Not available now
+                      </div>
+                    </div>
+                  </div>
+                  <div className="btn btn-lg btn-primary btn-block disabled">
+                    <span className="pl-2 pr-2">Sign in</span>
+                  </div>
 
                   <div className="mt-1 mb-1">- OR -</div>
                   <div className="btn btn-block btn-lg btn-outline-primary mb-5" onClick={this.handleClick}>
@@ -93,7 +98,7 @@ class Login extends Component {
   render() {
     const arr = {
       [LOGIN_STATE.INIT]: this.loginPage(),
-      [LOGIN_STATE.NOT_LOGIN]: this.loginPage({show: true}),
+      [LOGIN_STATE.NOT_LOGIN]: this.loginPage({ show: true }),
       [LOGIN_STATE.LOGIN]: this.props.children
     };
     return arr[this.state.login];
