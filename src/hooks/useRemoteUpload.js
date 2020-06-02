@@ -7,8 +7,7 @@ function useRemoteUpload() {
   const [alerts, setAlerts] = useState([]);
   const [list, setList] = useState({});
 
-  const refreshList = () => {
-    if (window.debug_mode) return refreshList;
+  const refreshList = (cb) => {
     fetch("https://remote-upload.herokuapp.com/?list", {
       credentials: "include"
     })
@@ -16,13 +15,12 @@ function useRemoteUpload() {
       .then(
         (result) => {
           console.log(result);
-          setList({ ...result });
+          cb && cb({ ...result });
         },
         (error) => {
           console.log(error);
         }
       );
-    return refreshList;
   };
 
   const submitForm = () => {
@@ -55,7 +53,7 @@ function useRemoteUpload() {
             msg: name + " add into upload queue."
           }
         ]);
-        refreshList();
+        refreshList(setList);
       },
       (error) => {
         setAlerts((prevAlerts) => [
@@ -87,7 +85,8 @@ function useRemoteUpload() {
   }, [url, setName]);
 
   useEffect(() => {
-    const i = setInterval(refreshList(), 3000);
+    refreshList(setList);
+    const i = setInterval(refreshList, 3000, setList);
     return () => {
       clearInterval(i);
     };
