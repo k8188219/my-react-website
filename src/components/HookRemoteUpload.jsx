@@ -16,9 +16,9 @@ function HookRemoteUpload() {
           />
         ))}
       </div>
-      <div className="container vh-100 pt-5">
+      <div className="container vh-100 pt-4">
         <form action="" method="get" id="form">
-          <div className="form-row" style={{ overflow: "auto" }}>
+          <div className="form-row pt-2" style={{ overflow: "auto" }}>
             <div className="col-md-4 col-sm-6 col-12">
               <input type="text" className="form-control mb-2 mr-sm-2" placeholder="url" {...bindUrl} />
             </div>
