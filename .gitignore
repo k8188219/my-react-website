@@ -10,6 +10,7 @@
 
 # production
 /build
+copy.bat
 
 # development
 /src
