@@ -8,7 +8,7 @@
     <meta name="description" content="Web site created using create-react-app" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <style>
-      .jumbotron {
+      .bg-lite-purple {
         background-color: #f4f2fb;
       }
       .spinner-border {
@@ -78,7 +78,7 @@
       }
       .japanese-cube {
         position: absolute;
-        height: calc(100% - var(--off-y) + 1.5rem);
+        height: calc(100% - var(--off-y) + 3rem);
         width: 100vw;
         top: 0;
         left: 0;
@@ -86,7 +86,7 @@
       .blur {
         z-index: -1;
         filter: blur(5px);
-        transform: translate(calc(-50vw + var(--container-w) / 2), calc(var(--off-y) - 1.5rem));
+        transform: translate(calc(-50vw + var(--container-w) / 2), calc(var(--off-y) - 3rem));
       }
       @media screen and (max-width: 575px) {
         .jumbotron h1 {
@@ -124,7 +124,9 @@
           t = () => {
             if (
               ((newOffHeight =
-                document.querySelector(".jumbotron").offsetHeight + document.querySelector(".navbar").offsetHeight),
+                document.querySelector(".jumbotron").offsetHeight +
+                document.querySelector(".navbar").offsetHeight +
+                72),
               newOffHeight !== e)
             ) {
               document.documentElement;
@@ -219,6 +221,6 @@
       })([]);
     </script>
     <script src="./static/js/2.1437d13e.chunk.js"></script>
-    <script src="./static/js/main.d13d8af7.chunk.js"></script>
+    <script src="./static/js/main.ab97d4fe.chunk.js"></script>
   </body>
 </html>
