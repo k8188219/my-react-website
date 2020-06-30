@@ -8,6 +8,9 @@
     <meta name="description" content="Web site created using create-react-app" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <style>
+      .jumbotron {
+        background-color: #f4f2fb;
+      }
       .spinner-border {
         width: 15vmin;
         height: 15vmin;
@@ -116,21 +119,20 @@
       }
     </style>
     <script>
-      (window.debug_mode = !0),
-        (window.onload = () => {
-          let e = 0,
-            t = () => {
-              if (
-                ((newOffHeight =
-                  document.querySelector(".jumbotron").offsetHeight + document.querySelector(".navbar").offsetHeight),
-                newOffHeight !== e)
-              ) {
-                document.documentElement;
-                document.documentElement.style.setProperty("--off-y", -newOffHeight + "px"), (e = newOffHeight);
-              }
-            };
-          window.addEventListener("resize", t), t();
-        });
+      window.onload = () => {
+        let e = 0,
+          t = () => {
+            if (
+              ((newOffHeight =
+                document.querySelector(".jumbotron").offsetHeight + document.querySelector(".navbar").offsetHeight),
+              newOffHeight !== e)
+            ) {
+              document.documentElement;
+              document.documentElement.style.setProperty("--off-y", -newOffHeight + "px"), (e = newOffHeight);
+            }
+          };
+        window.addEventListener("resize", t), t();
+      };
     </script>
     <title>Remote-Upload</title>
     <link href="./static/css/main.69eda509.chunk.css" rel="stylesheet" />
