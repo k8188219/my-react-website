@@ -65,12 +65,12 @@ class Login extends Component {
                   <h1 className="h3 mb-3 font-weight-normal">Login</h1>
                   <input type="email" id="inputEmail" className="form-control" placeholder="Email address" disabled />
                   <input type="password" id="inputPassword" className="form-control" placeholder="Password" disabled />
-                  <div className="position-relative">
-                    <div className="bs-tooltip-top show tooltip w-100" style={{ top: "calc(-0.8rem - .5rem - 1.5em)" }}>
-                      <div className="arrow" style={{ left: "calc(50% - 0.4rem)" }}></div>
-                      <div className="tooltip-inner ml-auto mr-auto" style={{ width: "fit-content" }}>
+                  <div className="d-flex justify-content-center position-relative">
+                    <div className="bs-tooltip-top d-flex flex-wrap justify-content-center py-0 show tooltip" style={{ bottom: "0px" }}>
+                      <div className="tooltip-inner w-100">
                         Not available now
                       </div>
+                      <div className="arrow justify-content-center position-relative"></div>
                     </div>
                   </div>
                   <div className="btn btn-lg btn-primary btn-block disabled">

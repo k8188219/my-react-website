@@ -8,6 +8,7 @@ function useRemoteUpload() {
   const [list, setList] = useState({});
 
   const refreshList = (cb) => {
+    if(window.debug_mode) return
     fetch("https://remote-upload.herokuapp.com/?list", {
       credentials: "include"
     })

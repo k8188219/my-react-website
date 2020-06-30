@@ -28,6 +28,9 @@
     -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <style type="text/css">
+      .jumbotron {
+        background-color: #f4f2fb;
+      }
       .spinner-border {
         width: 15vmin;
         height: 15vmin;
@@ -75,13 +78,130 @@
         background-color: var(--purple);
       }
 
-      @media screen and (max-width: 576px) {
+      .bg-transparent-white {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      body,
+      .japanese-cube {
+        background-color: hsl(260, 50%, 93%);
+        background-image: linear-gradient(
+            30deg,
+            hsl(260, 50%, 92%) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            hsl(260, 50%, 92%) 87.5%,
+            hsl(260, 50%, 92%)
+          ),
+          linear-gradient(
+            150deg,
+            hsl(260, 50%, 92%) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            hsl(260, 50%, 92%) 87.5%,
+            hsl(260, 50%, 92%)
+          ),
+          linear-gradient(
+            30deg,
+            hsl(260, 50%, 92%) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            hsl(260, 50%, 92%) 87.5%,
+            hsl(260, 50%, 92%)
+          ),
+          linear-gradient(
+            150deg,
+            hsl(260, 50%, 92%) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            hsl(260, 50%, 92%) 87.5%,
+            hsl(260, 50%, 92%)
+          ),
+          linear-gradient(
+            60deg,
+            hsl(260, 50%, 95%) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            hsl(260, 50%, 95%) 75%,
+            hsl(260, 50%, 95%)
+          ),
+          linear-gradient(
+            60deg,
+            hsl(260, 50%, 95%) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            hsl(260, 50%, 95%) 75%,
+            hsl(260, 50%, 95%)
+          );
+        background-size: 320px 560px;
+        background-position: 0 0, 0 0, 160px 280px, 160px 280px, 0 0, 160px 280px;
+      }
+
+      .japanese-cube {
+        position: absolute;
+        height: calc(100% - var(--off-y) + 1.5rem);
+        width: 100vw;
+        top: 0;
+        left: 0;
+      }
+
+      .blur {
+        z-index: -1;
+        filter: blur(5px);
+        transform: translate(calc(-50vw + var(--container-w) / 2), calc(var(--off-y) - 1.5rem));
+      }
+
+      @media screen and (max-width: 575px) {
         .jumbotron h1 {
           font-size: 1.75rem;
           overflow: hidden;
         }
       }
+      :root {
+        --container-w: 100%;
+      }
+
+      @media (min-width: 576px) {
+        :root {
+          --container-w: 540px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        :root {
+          --container-w: 720px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        :root {
+          --container-w: 960px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        :root {
+          --container-w: 1140px;
+        }
+      }
     </style>
+    <script>
+      // window.debug_mode = true;
+      window.onload = () => {
+        let offHeight = 0;
+        let resizeCb = () => {
+          newOffHeight =
+            document.querySelector(".jumbotron").offsetHeight + document.querySelector(".navbar").offsetHeight;
+          if (newOffHeight !== offHeight) {
+            let root = document.documentElement;
+            document.documentElement.style.setProperty("--off-y", -newOffHeight + "px");
+            offHeight = newOffHeight;
+          }
+        };
+        window.addEventListener("resize", resizeCb);
+        resizeCb();
+      };
+    </script>
     <title>Remote-Upload</title>
   </head>
   <body>

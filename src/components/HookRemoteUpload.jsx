@@ -16,39 +16,40 @@ function HookRemoteUpload() {
           />
         ))}
       </div>
-      <div className="container vh-100 pt-4">
-        <form action="" method="get" id="form">
-          <div className="form-row pt-2" style={{ overflow: "auto" }}>
-            <div className="col-md-4 col-sm-6 col-12">
-              <input type="text" className="form-control mb-2 mr-sm-2" placeholder="url" {...bindUrl} />
-            </div>
-            <div className="col-md-2 col-sm-4 col-8">
-              <input type="text" className="form-control mb-2 mr-sm-2" placeholder="name" {...bindName} />
-            </div>
-            <div className="col-md-1 col-sm-2 col-4">
+      <div className="container px-0 py-4 vh-100">
+        <div className="bg-transparent-white shadow rounded py-4 py-md-5 px-4 px-md-5 h-100 position-relative overflow-hidden d-flex flex-column">
+          <form action="" method="get" id="form">
+            <div className="form-row pt-2 justify-content-end" style={{ overflow: "auto" }}>
+              <div className="col-xl-4 col-lg-5 col-sm-6 col-12">
+                <input type="text" className="form-control mb-2 mr-sm-2" placeholder="url" {...bindUrl} />
+              </div>
+              <div className="col-xl-2 col-lg-3 col-sm-4 col">
+                <input type="text" className="form-control mb-2 mr-sm-2" placeholder="name" {...bindName} />
+              </div>
               <input onClick={submitForm} type="button" className="btn btn-primary mb-2" value="Submit" />
             </div>
+          </form>
+          <div className="table-responsive">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th style={{ width: "60%" }}>Name</th>
+                  <th style={{ width: "40%" }}>Progress</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+                {Object.keys(list).map((key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{key}</td>
+                      <td>{list[key]}%</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
-        </form>
-        <div className="table-responsive">
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th style={{ width: "60%" }}>Name</th>
-                <th style={{ width: "40%" }}>Progress</th>
-              </tr>
-            </thead>
-            <tbody id="list">
-              {Object.keys(list).map((key) => {
-                return (
-                  <tr key={key}>
-                    <td>{key}</td>
-                    <td>{list[key]}%</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="japanese-cube blur"></div>
         </div>
       </div>
     </>
