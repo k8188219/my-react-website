@@ -28,7 +28,7 @@
     -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <style type="text/css">
-      .jumbotron {
+      .bg-lite-purple {
         background-color: #f4f2fb;
       }
       .spinner-border {
@@ -139,7 +139,7 @@
 
       .japanese-cube {
         position: absolute;
-        height: calc(100% - var(--off-y) + 1.5rem);
+        height: calc(100% - var(--off-y) + 3rem);
         width: 100vw;
         top: 0;
         left: 0;
@@ -148,7 +148,7 @@
       .blur {
         z-index: -1;
         filter: blur(5px);
-        transform: translate(calc(-50vw + var(--container-w) / 2), calc(var(--off-y) - 1.5rem));
+        transform: translate(calc(-50vw + var(--container-w) / 2), calc(var(--off-y) - 3rem));
       }
 
       @media screen and (max-width: 575px) {
@@ -186,12 +186,14 @@
       }
     </style>
     <script>
-      // window.debug_mode = true;
+      window.debug_mode = true;
       window.onload = () => {
         let offHeight = 0;
         let resizeCb = () => {
           newOffHeight =
-            document.querySelector(".jumbotron").offsetHeight + document.querySelector(".navbar").offsetHeight;
+            document.querySelector(".jumbotron").offsetHeight +
+            document.querySelector(".navbar").offsetHeight +
+            72;
           if (newOffHeight !== offHeight) {
             let root = document.documentElement;
             document.documentElement.style.setProperty("--off-y", -newOffHeight + "px");

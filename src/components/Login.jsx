@@ -21,11 +21,26 @@ class Login extends Component {
       }
     }, console.log);
   };
-  handleClick = () => {
+  handleGoogleSignIn = () => {
     const top = window.screen.height > 600 ? (window.screen.height - 600) / 2 : 0;
     const left = window.screen.width > 600 ? (window.screen.width - 600) / 2 : 0;
     const newWindow = window.open(
       "https://remote-upload.herokuapp.com/",
+      "",
+      `toolbar=no,location=yes,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=599,height=600,top=${top},left=${left}`
+    );
+    const timer = setInterval(() => {
+      if (newWindow.closed) {
+        clearInterval(timer);
+        this.chechLogin();
+      }
+    }, 100);
+  };
+  handleGuestSignIn = () => {
+    const top = window.screen.height > 600 ? (window.screen.height - 600) / 2 : 0;
+    const left = window.screen.width > 600 ? (window.screen.width - 600) / 2 : 0;
+    const newWindow = window.open(
+      "https://remote-upload.herokuapp.com/?guest",
       "",
       `toolbar=no,location=yes,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=599,height=600,top=${top},left=${left}`
     );
@@ -78,7 +93,7 @@ class Login extends Component {
                   </div>
 
                   <div className="mt-1 mb-1">- OR -</div>
-                  <div className="btn btn-block btn-lg btn-outline-primary mb-5" onClick={this.handleClick}>
+                  <div className="btn btn-block btn-lg btn-outline-primary mb-1" onClick={this.handleGoogleSignIn}>
                     <img
                       className="navbar-toggler-icon"
                       alt=""
@@ -86,6 +101,8 @@ class Login extends Component {
                     />
                     <span className="pl-2 pr-2">Sign in</span>
                   </div>
+                  {/*eslint-disable-next-line*/}
+                  <div className="mt-1 mb-5"><a href="#" onClick={this.handleGuestSignIn}>Guest Login</a></div>
                 </form>
               </div>
             </div>
@@ -94,7 +111,6 @@ class Login extends Component {
       </>
     );
   };
-
   render() {
     const arr = {
       [LOGIN_STATE.INIT]: this.loginPage(),
