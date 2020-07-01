@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![img](https://lh3.googleusercontent.com/pw/ACtC-3capg0cax9_E6rfR3KXuCCDwY5nZ-Rw51HiKisi6QG2wnCDL3ckjZqx5L3f7dU8VOJ3NTu1pv2TGBCyoopCFbk4Or11SOLup5HUqTJVWZfV0rqOi4alz1kRnPPT2sWkZ_hf_ZJ0a_8ZhwHg0AfkrT6d=w1169-h707-no)
+
 https://k8188219.github.io/my-react-website/
 
 ## Available Scripts
