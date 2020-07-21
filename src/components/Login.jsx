@@ -12,7 +12,7 @@ class Login extends Component {
     };
   }
   chechLogin = () => {
-    fetch("https://remote-upload.herokuapp.com/", { redirect: "manual", credentials: "include" }).then((res) => {
+    fetch("https://remote-upload.herokuapp.com/API/login?type=user", { redirect: "manual", credentials: "include" }).then((res) => {
       if (res.type === "opaqueredirect") {
         console.log("notLogin");
         this.setState({ login: LOGIN_STATE.NOT_LOGIN });
@@ -21,26 +21,11 @@ class Login extends Component {
       }
     }, console.log);
   };
-  handleGoogleSignIn = () => {
+  handleSignIn = (type) => {
     const top = window.screen.height > 600 ? (window.screen.height - 600) / 2 : 0;
     const left = window.screen.width > 600 ? (window.screen.width - 600) / 2 : 0;
     const newWindow = window.open(
-      "https://remote-upload.herokuapp.com/",
-      "",
-      `toolbar=no,location=yes,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=599,height=600,top=${top},left=${left}`
-    );
-    const timer = setInterval(() => {
-      if (newWindow.closed) {
-        clearInterval(timer);
-        this.chechLogin();
-      }
-    }, 100);
-  };
-  handleGuestSignIn = () => {
-    const top = window.screen.height > 600 ? (window.screen.height - 600) / 2 : 0;
-    const left = window.screen.width > 600 ? (window.screen.width - 600) / 2 : 0;
-    const newWindow = window.open(
-      "https://remote-upload.herokuapp.com/?guest",
+      `https://remote-upload.herokuapp.com/API/login?type=${type}`,
       "",
       `toolbar=no,location=yes,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=599,height=600,top=${top},left=${left}`
     );
@@ -93,7 +78,7 @@ class Login extends Component {
                   </div>
 
                   <div className="mt-1 mb-1">- OR -</div>
-                  <div className="btn btn-block btn-lg btn-outline-primary mb-1" onClick={this.handleGoogleSignIn}>
+                  <div className="btn btn-block btn-lg btn-outline-primary mb-1" onClick={() => this.handleSignIn('user')}>
                     <img
                       className="navbar-toggler-icon"
                       alt=""
@@ -102,7 +87,7 @@ class Login extends Component {
                     <span className="pl-2 pr-2">Sign in</span>
                   </div>
                   {/*eslint-disable-next-line*/}
-                  <div className="mt-1 mb-5"><a href="#" onClick={this.handleGuestSignIn}>Guest Login</a></div>
+                  <div className="mt-1 mb-5"><a href="#" onClick={() => this.handleSignIn('guest')}>Guest Login</a></div>
                 </form>
               </div>
             </div>
