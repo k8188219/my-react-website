@@ -9,7 +9,7 @@ function useRemoteUpload() {
 
   const refreshList = (cb) => {
     if(window.debug_mode) return
-    fetch("https://remote-upload.herokuapp.com/?list", {
+    fetch("https://remote-upload.herokuapp.com/API/file", {
       credentials: "include"
     })
       .then((res) => res.json())
@@ -36,7 +36,7 @@ function useRemoteUpload() {
       return;
     }
 
-    fetch("https://remote-upload.herokuapp.com/", {
+    fetch("https://remote-upload.herokuapp.com/API/file", {
       body: new URLSearchParams({
         url,
         name
